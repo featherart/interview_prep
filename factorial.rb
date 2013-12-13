@@ -6,6 +6,26 @@ def factorial(n)
   end
 end
 
+def add(*numbers)
+  numbers.inject(0) { |s, n| s + n }
+end
+
+def add_again(*numbers)
+  numbers.reduce(:+)
+end
+
+def subtract(*numbers)
+  numbers.reduce(:-)
+end
+
+def multiply(*numbers)
+  numbers.reduce(:*)
+end
+
+def divide(num1, num2)
+  num1 / num2
+end
+
 def unique?(str)
   arr = str.split('')
   p arr
