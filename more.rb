@@ -29,17 +29,45 @@ end
 # interleave(“abc”, “12345”) # => “a1b2c345”
 # ===================================================
 
-def interweave(arr1, arr2)
-  woven = []
-  arr1 = arr1.join.split('')
-  arr2 = arr2.join.split('')
-  p arr1
-  p arr2
-  (0...arr1.length).each do |i|
-    woven.push(arr1[i])
-    woven.push(arr2[i])
+def interleave(arr1, arr2)
+  if(arr1 && arr2).is_a? Array
+  	  size = 0
+	  woven = []
+	  p size
+	  arr1 = arr1.join.split('')
+	  arr2 = arr2.join.split('')
+	  (arr1.length > arr2.length) ? (size = arr1.length) : (size = arr2.length)
+	  p arr1
+	  p arr2
+	  (0...size).each do |i|
+	    woven.push(arr1[i])
+	    woven.push(arr2[i])
+	  end
+	  puts woven.join
+   end
+   # else
+	  # raise "Args are not Arrays"
+   # end
+end
+
+def interleave2(array1, array2)
+  if( array1 && array2 ).is_a? Array
+  	interleaved = []
+  	if array1.length < array2.length
+  		until array1.length == 0
+  			interleaved << array1.shift
+  			interleaved << array2.shift
+  		end
+  		interleaved << array2
+  	else
+  		until array2.length == 0
+  			interleaved << array2.shift
+  			interleaved << array1.shift
+  		end
+  		interleaved << array1
+  	end
   end
-  puts woven.join
+  p interleaved
 end
 
 
@@ -48,6 +76,14 @@ end
 
 # truncate(“this string”, 6) # => “thi…”
 # ===================================================
+def truncate(a_string, a_num)
+  if (a_string.is_a? String) && (a_num.is_a? Integer)
+    #p a_string.slice(0...a_num) # nope
+    p a_string.split("").slice(0...a_num).join
+  else
+    raise "Please enter correct params"
+  end
+end
 
 
 # Write a function ‘hashify’ that takes a 2D array (each inner array is a k/v pair) and creates a hash:
@@ -93,6 +129,7 @@ def fizzbuzz
 
 end
 
+# this way is a little bit faster
 def fizzbuzz2
   a = Time.now.to_f
 
@@ -128,6 +165,31 @@ end
 # Write a function that reverses an array. Use recursion.
 
 # ===================================================
+def reverse_array(arr, counter)
+  
+  reversed = []
+  reversed.push(arr[counter])
+  puts reversed
+  counter += 1
+  puts counter
+  if reversed.length == arr.length
+    reverse_array(arr, counter -= 1)
+  end
+  reversed
+end
+
+def reverse(arr)
+  arr.empty? ? arr : [arr.pop, *reverse(arr)]
+end
+
+# class Array
+#   def recursive_reverse
+#     return self if empty?
+#     [pop, *reverse]
+#   end
+# end
+
+
 # *Calculate Price
 
 # Some products in our store sell for a flat rate no matter the quantity.
@@ -138,7 +200,9 @@ end
 
 # Example, a Bottle Cap Tripod might be 1 for $5.00 or 2 for $7.00 or 10 for $30.00.
 
-# If a customer orders a quantity in-between one of the tiers, it's priced according to the last tier. So, if I ordered 4 Bottle Cap Tripods it would look at the closest tier which is 2 for $7.00, or $3.50 per tripod.
+# If a customer orders a quantity in-between one of the tiers, it's priced 
+# according to the last tier. So, if I ordered 4 Bottle Cap Tripods it would 
+# look at the closest tier which is 2 for $7.00, or $3.50 per tripod.
 
 # Each product stores the price tiers as a string that looks like this:
 
@@ -167,23 +231,31 @@ end
  
 # What is Big O of the function?
 # ===================================================
-# Write a function that counts the occurrences of each character in a string.  Choosing a suitable data structure for storage is up to you.
+# Write a function that counts the occurrences of each character in a string.  
+# Choosing a suitable data structure for storage is up to you.
 
 # If the string was really really long (like all of Wikipedia) what would you need to do?
 # ===================================================
-# Write a function called ‘map2x’ that takes an array of integers and returns a new array with each integer from the first array, doubled.
+# Write a function called ‘map2x’ that takes an array of integers 
+# and returns a new array with each integer from the first array, 
+# doubled.
 
 # map2x([1, 2, 3]) # => [2, 4, 6]
 
 # in: Ruby, then Javascript or CoffeeScript
 # ===================================================
-# Write a function called ‘map’ that takes an array and returns a new array with the result of applying the passed-in block to each element of the original array.
+# Write a function called ‘map’ that takes an array and returns a 
+# new array with the result of applying the passed-in block to 
+# each element of the original array.
 
 # map([1, 2, 3]) { |x| 2 * x } # => [2, 4, 6]
 
-# in: Ruby, then in Javascript or CoffeeScript (with a callback instead of a block)
+# in: Ruby, then in Javascript or CoffeeScript (with a callback 
+# instead of a block)
 # ===================================================
-# In Javascript/CoffeeScript, write a function called ‘twoTimers’ that starts two timers concurrently and calls a callback when they have both fired.
+# In Javascript/CoffeeScript, write a function called 
+# ‘twoTimers’ that starts two timers concurrently and calls a 
+# callback when they have both fired.
 
 # # timeout1 and timeout2 are milliseconds, callback is a function
 # twoTimers = (timeout1, timeout2, callback) ->
@@ -192,4 +264,4 @@ end
 # Design a SQL table for storing a tree of records
 # ===================================================
 # Design some SQL tables for storing Users, Posts, and allowing Users 
-#to upvote/downvote the Posts.
+# to upvote/downvote the Posts.
