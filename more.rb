@@ -29,25 +29,25 @@ end
 # interleave(“abc”, “12345”) # => “a1b2c345”
 # ===================================================
 
+# handling Strings is a giant pain
+# so just handle Arrays
 def interleave(arr1, arr2)
-  if(arr1 && arr2).is_a? Array
-  	  size = 0
+  if(arr1.is_a? Array) && (arr2.is_a? Array)
+  	size = 0
 	  woven = []
-	  p size
+	
 	  arr1 = arr1.join.split('')
 	  arr2 = arr2.join.split('')
 	  (arr1.length > arr2.length) ? (size = arr1.length) : (size = arr2.length)
-	  p arr1
-	  p arr2
+
 	  (0...size).each do |i|
 	    woven.push(arr1[i])
 	    woven.push(arr2[i])
 	  end
 	  puts woven.join
+   else
+	  raise "Args are not Arrays"
    end
-   # else
-	  # raise "Args are not Arrays"
-   # end
 end
 
 def interleave2(array1, array2)
