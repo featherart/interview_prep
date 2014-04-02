@@ -10,6 +10,9 @@ def factorial(n)
   end
 end
 
+# def factorial2(num)
+  
+
 def add(*numbers)
   numbers.inject(0) { |s, n| s + n }
 end

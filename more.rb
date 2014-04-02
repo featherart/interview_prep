@@ -88,7 +88,7 @@ end
 
 # Write a function ‘hashify’ that takes a 2D array (each inner array is a k/v pair) and creates a hash:
 
-# hashify([[‘k1’, ‘v1’], [‘k2’, ‘v2’]]) # => {‘k1’ => ‘v1’, ‘k2’ => ‘v2’}
+# hashify([['k1', 'v1'], ['k2', 'v2']]) # => {'k1’ => ‘v1’, ‘k2’ => ‘v2’}
 # ===================================================
 def make_hash( tuples )
   new_hash = {}
@@ -102,7 +102,21 @@ def make_hash( tuples )
   new_hash # {"a"=>1, "b"=>2, "c"=>3}
 end
 
+def better_make_hash(tuples)
+  return Hash[*tuples.flatten]
+end
 
+# reverse a string w/out reverse
+# there is no reason on earth to do this
+# but do it anyways!!
+def blah(a)
+  b = ""
+  # it's the last bit that does the reverse
+  # if you pass the block 'one + two' you get the same string
+  # nifty!
+  b << a.each_char.inject("") { |one,two| two + one }
+  b
+end
 
 # Write a function ‘fizzbuzz’ that prints the numbers 1..100, replacing:
 
@@ -178,17 +192,40 @@ def reverse_array(arr, counter)
   reversed
 end
 
+# this actually doesn't work, yay!
 def reverse(arr)
   arr.empty? ? arr : [arr.pop, *reverse(arr)]
+  p arr
 end
 
-# class Array
-#   def recursive_reverse
-#     return self if empty?
-#     [pop, *reverse]
-#   end
-# end
+def reverse_it(arr)
+  if arr.length == 0
+    return ""
+  elsif arr.length == 1
+    return arr
+  else
+    (0...(arr.length/2)).each do |i|
+      swap(arr.length-i, i, arr)
+    end
+  end
+  p arr
+end
 
+def swap(i1, i2, arr)
+  puts "i1: #{i1} i2: #{i2}"
+  p arr
+  holder = arr[i1]
+  puts "holder: #{holder}"
+  arr[i1] = arr[i2]
+  arr[i2] = holder
+  arr
+end
+
+def another_reverse(str)
+  new_str = ""
+  str.length.times{|i| new_str << str[(i+1)*(-1)]}
+  new_str
+end 
 
 # *Calculate Price
 
